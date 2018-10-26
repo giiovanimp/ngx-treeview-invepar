@@ -6,6 +6,9 @@ import { CityComponent } from './city/city.component';
 import { RoomComponent } from './room/room.component';
 import { DropdownTreeviewSelectDemoComponent } from './dropdown-treeview-select/dropdown-treeview-select-demo.component';
 import { ProductComponent } from './product/product.component';
+import { AppTreeComponent } from './ng-bootstrap-treeview/app-treeview.component';
+import { TreeViewNgModule } from './ng-bootstrap-treeview/treeview-ng.module';
+import { TreeViewComponent } from './ng-bootstrap-treeview/tree-view.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'components', pathMatch: 'full' },
@@ -13,6 +16,7 @@ const routes: Routes = [
     { path: 'pipe', component: CityComponent },
     { path: 'performance', component: RoomComponent },
     { path: 'template', component: DropdownTreeviewSelectDemoComponent },
+    { path: 'tree', component: AppTreeComponent },
     { path: 'advanced', component: ProductComponent },
     { path: '**', component: NotFoundComponent }
 ];

@@ -13,6 +13,8 @@ import { NotFoundComponent } from './not-found.component';
 import { DropdownTreeviewSelectModule } from './dropdown-treeview-select';
 import { I18n } from './i18n';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
+import { TreeViewComponent } from './ng-bootstrap-treeview/tree-view.component';
+import { AppTreeComponent } from './ng-bootstrap-treeview/app-treeview.component';
 
 @NgModule({
     imports: [
@@ -21,7 +23,8 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
         HttpClientModule,
         TreeviewModule.forRoot(),
         DropdownTreeviewSelectModule,
-        AppRoutingModule
+        AppRoutingModule,
+        TreeviewModule
     ],
     declarations: [
         NotFoundComponent,
@@ -30,7 +33,9 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
         RoomComponent,
         ProductComponent,
         AppComponent,
-        DisabledOnSelectorDirective
+        DisabledOnSelectorDirective,
+        TreeViewComponent,
+        AppTreeComponent
     ],
     providers: [
         I18n

@@ -22,24 +22,24 @@ class FilterTreeviewItem extends TreeviewItem {
         this.refItem = item;
     }
 
-    // updateRefChecked() {
-    //     this.children.forEach(child => {
-    //         if (child instanceof FilterTreeviewItem) {
-    //             child.updateRefChecked();
-    //         }
-    //     });
+    updateRefChecked() {
+        this.children.forEach(child => {
+            if (child instanceof FilterTreeviewItem) {
+                child.updateRefChecked();
+            }
+        });
 
-    //     let refChecked = this.checked;
-    //     if (refChecked) {
-    //         for (const refChild of this.refItem.children) {
-    //             if (!refChild.checked) {
-    //                 refChecked = false;
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     this.refItem.checked = refChecked;
-    // }
+        let refChecked = this.checked;
+        if (refChecked) {
+            for (const refChild of this.refItem.children) {
+                if (!refChild.checked) {
+                    refChecked = false;
+                    break;
+                }
+            }
+        }
+        this.refItem.checked = refChecked;
+    }
 }
 
 @Component({
@@ -198,21 +198,21 @@ export class TreeviewComponent implements OnChanges {
 
     private updateCheckedOfAll() {
         console.log('caiu no updateCheckedOfAll');
-        // let itemChecked: boolean = null;
-        // for (const filterItem of this.filterItems) {
-        //     if (itemChecked === null) {
-        //         itemChecked = filterItem.checked;
-        //     } else if (itemChecked !== filterItem.checked) {
-        //         itemChecked = undefined;
-        //         break;
-        //     }
-        // }
+        let itemChecked: boolean = null;
+        for (const filterItem of this.filterItems) {
+            if (itemChecked === null) {
+                itemChecked = filterItem.checked;
+            } else if (itemChecked !== filterItem.checked) {
+                itemChecked = undefined;
+                break;
+            }
+        }
 
-        // if (itemChecked === null) {
-        //     itemChecked = false;
-        // }
+        if (itemChecked === null) {
+            itemChecked = false;
+        }
 
-        // this.allItem.checked = itemChecked;
+        this.allItem.checked = itemChecked;
     }
 
     private updateCollapsedOfAll() {
