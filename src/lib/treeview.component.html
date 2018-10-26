@@ -3,10 +3,10 @@
     <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
       [class.fa-caret-down]="!item.collapsed"></i>
     <div class="form-check">
-      <input type="radio" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()"
+      <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()"
         [disabled]="item.disabled" [indeterminate]="item.indeterminate" />
       <label class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
-        {{item.text}} {{item.value}}
+        {{item.text}}
       </label>
     </div>
   </div>
