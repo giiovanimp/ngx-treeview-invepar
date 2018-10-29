@@ -1,9 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { DocumentoService } from '../services/documento.service';
-import { Documento } from './documento';
-import { ProcessoService } from './../services/processo.service';
-
 /**
  * Service class that represents PickListComponent.
  * @author odair.pereira@castgroup.com.br
@@ -16,102 +12,55 @@ export class PickListComponent implements OnInit {
 
   @Input() showButtons: boolean;
   @Input() isEdit: boolean;
-  @Output() carregouDocumentos = new EventEmitter<boolean>();
-  documentos: Documento[] = [];
-  selectDocumentos: any[] = [];
+  @Input() list: any[];
+  @Input() listLabel: string;
+  @Input() selectedLabel: string;
 
-  documentosObrigatorios: Documento[] = [];
-  selectdDocumentosObrigatorios: any[] = [];
+  items: any[] = [];
 
-  documentosOpcionais: Documento[] = [];
-  selectdDocumentosOpcionais: any[] = [];
+  /*
+   * Items selected to be added to the selected list
+   */
+  selectedItems: any[] = [];
 
-  constructor(private processoService: ProcessoService,
-    private documentoService: DocumentoService) {
+  /*
+   * Items already added to the selected list
+   */
+  itemsSelected: any[] = [];
+
+  /*
+   * Items selected to be removed from the selected list
+   */
+  selectedItemsSelected: any[] = [];
+
+  constructor() {
   }
 
   ngOnInit() {
-    this.getDocumentos();
+    this.items = this.list;
   }
 
-  /**
-  * Get Documentos
-  */
-  public getDocumentos() {
-    this.documentoService.getDocumentos().subscribe(data => {
-      this.documentos = data;
-      this.carregouDocumentos.emit(true);
-    });
-  }
-
-  public addCampoObrigatorio(event) {
-    for (var i = 0; i < this.selectDocumentos.length; i++) {
-      const doc = this.getDocumentoByName(this.selectDocumentos[i]);
-      doc.cor = 'green';
-      this.documentosObrigatorios.push(doc);
-      for (var j = 0; j < this.documentos.length; j++) {
-        if (this.documentos[j].nome == doc.nome) {
-          this.documentos.splice(j, 1);
-        }
-      }
+  public addSelectedItems(event) {
+    for (let i = 0; i < this.selectedItems.length; i++) {
+      const item = this.items.find(element => element.description() === this.selectedItems[i]);
+      const index = this.items.indexOf(item);
+      this.itemsSelected.push(item);
+      this.items.splice(index, 1);
     }
-    this.selectDocumentos = [];
+    this.selectedItems = [];
   }
 
-  public removeCampoObrigatorio(event) {
-    for (var i = 0; i < this.selectdDocumentosObrigatorios.length; i++) {
-      const doc = this.getDocumentoByName(this.selectdDocumentosObrigatorios[i]);
-      doc.cor = 'red';
-      this.documentos.push(doc);
-      for (var j = 0; j < this.documentosObrigatorios.length; j++) {
-        if (this.documentosObrigatorios[j].nome == doc.nome) {
-          this.documentosObrigatorios.splice(j, 1);
-        }
-      }
+  public removeSelectedItems(event) {
+    for (let i = 0; i < this.selectedItemsSelected.length; i++) {
+      const item = this.itemsSelected.find(element => element.description() === this.selectedItemsSelected[i]);
+      const index = this.itemsSelected.indexOf(item);
+      this.items.push(item);
+      this.itemsSelected.splice(index, 1);
     }
-    this.selectdDocumentosObrigatorios = [];
+    this.selectedItemsSelected = [];
   }
 
-  public addCampoOpcional(event) {
-    for (var i = 0; i < this.selectDocumentos.length; i++) {
-      const doc = this.getDocumentoByName(this.selectDocumentos[i]);
-      doc.cor = 'green';
-      this.documentosOpcionais.push(doc);
-      for (var j = 0; j < this.documentos.length; j++) {
-        if (this.documentos[j].nome === doc.nome) {
-          this.documentos.splice(j, 1);
-        }
-      }
-    }
-    this.selectDocumentos = [];
-  }
-
-  public removeCampoOpcional(event) {
-    for (var i = 0; i < this.selectdDocumentosOpcionais.length; i++) {
-      const doc = this.getDocumentoByName(this.selectdDocumentosOpcionais[i]);
-      doc.cor = 'red';
-      this.documentos.push(doc);
-      for (var j = 0; j < this.documentosOpcionais.length; j++) {
-        if (this.documentosOpcionais[j].nome === doc.nome) {
-          this.documentosOpcionais.splice(j, 1);
-        }
-      }
-    }
-    this.selectdDocumentosOpcionais = [];
-  }
-
-  public getAllSelectedDocumentos() {
-    return [... this.documentosObrigatorios, ... this.documentosOpcionais];
-  }
-
-  private getDocumentoByName(nome) {
-    let doc = this.documentos.find(doc => doc.nome === nome);
-    if (!doc) {
-      doc = this.documentosObrigatorios.find(doc => doc.nome === nome)
-    }
-    if (!doc) {
-      doc = this.documentosOpcionais.find(doc => doc.nome === nome)
-    }
-    return doc;
+  getSelectedItems() {
+    return this.itemsSelected;
   }
 }

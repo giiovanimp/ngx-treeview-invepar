@@ -1,78 +1,30 @@
 <form>
-  <div id="wrapPush"></div>
+  <div></div>
   <div class="row">
     <div class="form-group col-md-4">
-      <label for="">&nbsp; Campos Disponíveis *</label>
+      <label>{{ listLabel }}</label>
       <div>
-        <select multiple class="form-control" style="height:493px;" name="selectDocumentos" [(ngModel)]="selectDocumentos">
-          <option *ngFor="let documento of documentos" [ngClass]="{
-            'green': (isEdit && documento.cor == 'green'),
-            'red': (isEdit && documento.cor == 'red')
-          }">{{documento.nome}}</option>
+        <select multiple class="form-control" style="height:215px;" name="items" [(ngModel)]="selectedItems">
+          <option *ngFor="let item of items" >{{item.description()}}</option>
         </select>
       </div>
     </div>
     <ng-container *ngIf="showButtons">
-      <div class="form-group col-md-1">
-        <div id="wrapPush"></div>
-        <label for="">&nbsp;</label>
-        <a (click)="addCampoObrigatorio($event)">
-          <span class="btn btn-default">
-            <i class="glyphicon glyphicon-chevron-right"></i>
-          </span>
-        </a>
-        <div id="wrapPushButton"></div>
-        <label for="">&nbsp;</label>
-        <a (click)="removeCampoObrigatorio($event)">
-          <span class="btn btn-default">
-            <i class="glyphicon glyphicon-chevron-left"></i>
-          </span>
-        </a>
+      <div class="form-group col-md-1" style="margin-top: 8%;">
+          <label>&nbsp;</label>
+          <button class="btn btn-default" (click)="addSelectedItems($event)"><i class="fa fa-arrow-right"></i></button>
+          <br>
+          <div class="clearfix">&nbsp;</div>
+          <label>&nbsp;</label>
+        <button class="btn btn-default" (click)="removeSelectedItems($event)"><i class="fa fa-arrow-left"></i></button>
       </div>
     </ng-container>
 
     <div class="form-group col-md-4">
-      <label for="codigo">&nbsp; Campos Obrigatórios *</label>
+      <label>{{ selectedLabel }}</label>
       <div>
-        <select multiple class="form-control" style="height: 215px;" name="selectdDocumentosObrigatorios" [(ngModel)]="selectdDocumentosObrigatorios">
-          <option *ngFor="let documentoObrigatorio of documentosObrigatorios" [ngClass]="{
-            'green': (isEdit && documentoObrigatorio.cor == 'green'),
-            'red': (isEdit && documentoObrigatorio.cor == 'red')
-          }" >{{documentoObrigatorio.nome}}</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group col-md-3" style="
-  height: 260px;
-">&nbsp;</div>
-    <div id="wrapPush"></div>
-    <ng-container *ngIf="showButtons">
-      <div class="form-group col-md-1">
-        <div id="wrapPush"></div>
-        <label for="">&nbsp;</label>
-        <a (click)="addCampoOpcional($event)">
-          <span class="btn btn-default">
-            <i class="glyphicon glyphicon-chevron-right"></i>
-          </span>
-        </a>
-        <div id="wrapPushButton"></div>
-        <label for="">&nbsp;</label>
-        <a (click)="removeCampoOpcional($event)">
-          <span class="btn btn-default">
-            <i class="glyphicon glyphicon-chevron-left"></i>
-          </span>
-        </a>
-      </div>
-    </ng-container>
-    <div class="form-group col-md-4">
-      <label for="codigo">&nbsp; Campos Opcionais </label>
-      <div>
-        <select multiple class="form-control" style="height:215px;" name="selectdDocumentosOpcionais" [(ngModel)]="selectdDocumentosOpcionais">
-          <option *ngFor="let documentoOpcional of documentosOpcionais" [ngClass]="{
-            'green': (isEdit && documentoOpcional.cor == 'green'),
-            'red': (isEdit &&documentoOpcional.cor == 'red')
-          }">{{documentoOpcional.nome}}</option>
+        <select multiple class="form-control" style="height: 215px;" name="selectdItems" [(ngModel)]="selectedItemsSelected">
+          <option *ngFor="let selectedItem of itemsSelected" >{{selectedItem.description()}}</option>
         </select>
       </div>
     </div>

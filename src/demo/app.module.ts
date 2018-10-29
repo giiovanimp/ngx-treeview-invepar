@@ -13,6 +13,8 @@ import { NotFoundComponent } from './not-found.component';
 import { DropdownTreeviewSelectModule } from './dropdown-treeview-select';
 import { I18n } from './i18n';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
+import {PickListComponent} from '../pick-list/pick-list.component';
+import {DualSelectComponent} from './dual-select/dual-select.component';
 
 @NgModule({
     imports: [
@@ -30,7 +32,9 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
         RoomComponent,
         ProductComponent,
         AppComponent,
-        DisabledOnSelectorDirective
+        DisabledOnSelectorDirective,
+        PickListComponent,
+        DualSelectComponent
     ],
     providers: [
         I18n
